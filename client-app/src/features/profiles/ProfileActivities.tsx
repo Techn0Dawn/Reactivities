@@ -17,12 +17,13 @@ import { format } from "date-fns";
 import { useStore } from "../../app/stores/store";
 import { UserActivity } from "../../app/models/profile";
 import { PagingParams } from "../../app/models/pagination";
-import InfiniteScroll from "react-infinite-scroller";
+
 const panes = [
   { menuItem: "Future Events", pane: { key: "future" } },
   { menuItem: "Past Events", pane: { key: "past" } },
   { menuItem: "Hosting", pane: { key: "hosting" } },
 ];
+
 export default observer(function ProfileActivities() {
   const { profileStore } = useStore();
   const {
@@ -39,10 +40,11 @@ export default observer(function ProfileActivities() {
 
   useEffect(() => {
     loadUserActivities(profile!.username, "future");
-  }, [loadUserActivities, profile, tabData]);
+  }, [loadUserActivities, profile]);
 
   const handleTabChange = (_: SyntheticEvent, data: TabProps) => {
-    setPagingParams(new PagingParams());
+    console.log("tab changed")
+    setPagingParams(new PagingParams(1, 20));
     resetUserActivities();
     const newTabData = panes[data.activeIndex as number].pane.key;
     setTabData(newTabData);
@@ -50,12 +52,13 @@ export default observer(function ProfileActivities() {
   };
 
   function handleGetNext() {
+    console.log(tabData);
     setLoadingNext(true);
-    setPagingParams(new PagingParams(pagination!.currentPage + 1));
+    setPagingParams(new PagingParams(pagination!.currentPage + 1, 20));
     loadUserActivities(profile!.username, tabData).then(() =>
       setLoadingNext(false)
     );
-  }
+  } 
 
   return (
     <TabPane loading={loadingActivities}>
@@ -70,16 +73,6 @@ export default observer(function ProfileActivities() {
             onTabChange={(e, data) => handleTabChange(e, data)}
           />
           <br />
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleGetNext}
-            hasMore={
-              !loadingNext &&
-              !!pagination &&
-              pagination.currentPage < pagination.totalPages
-            }
-            initialLoad={false}
-          >
             <Card.Group itemsPerRow={4}>
               {userActivities.map((activity: UserActivity) => (
                 <Card
@@ -106,7 +99,6 @@ export default observer(function ProfileActivities() {
             <Grid.Column width={10}>
               <Loader active={loadingNext} />
             </Grid.Column>
-          </InfiniteScroll>
         </Grid.Column>
       </Grid>
       <Grid centered>
@@ -117,7 +109,7 @@ export default observer(function ProfileActivities() {
             textAlign="center"
             basic
             size="mini"
-            content="You can scroll or click the button to load more if there are..."
+            content="click the button to load more if there are..."
           />
           <Button
             style={{ marginLeft: "50%" }}

@@ -1,8 +1,10 @@
 ﻿using Application.Followers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller
 {
+    [AllowAnonymous]
     public class FollowController : BaseApiController
     {
         [HttpPost("{username}")]

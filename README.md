@@ -19,3 +19,15 @@ navigate into the client-app directory and run
 ```
 npm run dev
 ```
+
+## Publishing
+#### Backend 
+navigate into the API directory and run 
+```
+dotnet publish -c Release -o ./bin/Publish
+```
+#### Frontend
+navigate into the client-app directory and run
+```
+npm run build
+```

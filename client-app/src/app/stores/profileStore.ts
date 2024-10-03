@@ -17,7 +17,7 @@ export default class ProfileStore {
   userActivities: UserActivity[] = [];
   loadingActivities = false;
   pagination: Pagination | null = null;
-  pagingParams = new PagingParams();
+  pagingParams = new PagingParams(1, 20);
 
   constructor() {
     makeAutoObservable(this);
@@ -236,6 +236,8 @@ export default class ProfileStore {
   };
 
   resetUserActivities = () => {
-    this.userActivities = [];
+    runInAction(() => {
+      this.userActivities = [];
+    });
   }
 }
