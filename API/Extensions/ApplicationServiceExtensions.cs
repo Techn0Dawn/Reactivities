@@ -31,7 +31,11 @@ namespace API.Extensions
                     // needed for SignalR
                     .AllowCredentials()
                     //
-                    .WithOrigins("http://localhost:3000");
+                    // needed for refreshToken 401 logic in client and
+                    // Pagination has to be declared here because it will overwrite other configurations
+                    .WithExposedHeaders("WWW-Authenticate", "Pagination")
+                    //
+                    .WithOrigins("http://localhost:3000", "https://localhost:3000");
                 });
             });
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
