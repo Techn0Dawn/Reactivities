@@ -19,7 +19,7 @@ export default observer(function RegisterForm() {
         error: null,
       }}
       onSubmit={(values, { setErrors }) =>
-        userStore.register(values).catch((error) => setErrors({ error }))
+        userStore.register(values).catch(error => setErrors({ error: error }))
       }
       validationSchema={Yup.object({
         displayName: Yup.string().required(),

@@ -10,6 +10,32 @@ You can create an Cloudinary account here https://cloudinary.com. It's free to u
 
 ## Starting
 #### Backend
+Edit the API/appsettings.json file to match the following template and fill in your values
+```
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "Cloudinary": {
+        "CloudName": "YOUR CLOUDINARY NAME",
+        "ApiKey": "YOUR CLOUDINARY API KEY",
+        "ApiSecret": "YOUR CLOUDINARY API SECRET"
+    },
+    "TokenKey": "YOUR JWT TOKEN KEY",
+    "SendGrid": {
+        "User": "YOUR SENDGRID USER",
+        "Key": "YOUR SENDGIRD KEY"
+    },
+        "ConnectionStrings": {
+        "DefaultConnection": "YOUR CONNECTION STRING"
+    }
+}
+```
+
 navigate into the API directory and run 
 ```
 dotnet watch run
