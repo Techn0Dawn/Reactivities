@@ -57,3 +57,6 @@ navigate into the client-app directory and run
 ```
 npm run build
 ```
+
+# Demo GIF
+![Alt Text](https://github.com/Techn0Dawn/Reactivities/blob/main/DemoGif.gif)
