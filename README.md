@@ -1,4 +1,5 @@
 # Web Application to plan, attend and manage Events.
+###### Project was developed in an Udemy course
 ### Backend: Asp.Net 
 The Backend is built with a **CQRS** (*Command and Query Responsibility Segregation*) architecture and utilize the a Mediator pattern via **MediatR**.
 Additionally the backend uses a **SignalR Hub** for Real-Time Communication and **Automapper** for easier mapping between entities. 
